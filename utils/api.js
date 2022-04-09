@@ -1,6 +1,9 @@
 import axios from "axios";
 
-export const baseURL = "http://localhost:4000/api";
+export const baseURL =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:4000/api"
+    : "http://teknix.my.id:4000/api";
 export const api = axios.create({
   baseURL: baseURL,
   timeout: 10000,
