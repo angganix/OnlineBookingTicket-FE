@@ -4,9 +4,19 @@ import Main from "../components/layouts/Main";
 import homeHero from "../public/lotties/home-hero.json";
 import Lottie from "lottie-react";
 import Link from "next/link";
-import { AccountBox } from ".";
+import LoginForm from "../components/forms/LoginForm";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const { user } = useSelector((state) => state.auth);
+  const router = useRouter();
+
+  if (user) {
+    router.push("/");
+    return;
+  }
+
   return (
     <Main>
       <Head>
@@ -17,7 +27,7 @@ export default function Login() {
 
       <main className="px-16 py-8">
         <div className="max-w-md mx-auto">
-          <AccountBox />
+          <LoginForm />
         </div>
       </main>
     </Main>

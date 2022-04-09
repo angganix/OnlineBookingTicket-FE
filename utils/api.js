@@ -5,6 +5,7 @@ export const api = axios.create({
   baseURL: baseURL,
   timeout: 10000,
   timeoutErrorMessage: "Server not responding",
+  withCredentials: true,
 });
 
 export const getRequest = async (url) => {
@@ -16,7 +17,7 @@ export const getRequest = async (url) => {
       throw new Error("Failed get data list");
     }
   } catch (error) {
-    return Promise.reject(error);
+    return Promise.reject(error?.response?.data);
   }
 };
 
@@ -29,7 +30,7 @@ export const postRequest = async (url, data) => {
       throw new Error("Failed to post data");
     }
   } catch (error) {
-    return Promise.reject(error);
+    return Promise.reject(error?.response?.data);
   }
 };
 
@@ -42,7 +43,7 @@ export const putRequest = async (url, data) => {
       throw new Error("Failed to update data");
     }
   } catch (error) {
-    return Promise.reject(error);
+    return Promise.reject(error?.response?.data);
   }
 };
 
@@ -53,6 +54,6 @@ export const deleteRequest = async (url) => {
       return Promise.resolve(deleteData?.data);
     }
   } catch (error) {
-    return Promise.reject(error);
+    return Promise.reject(error?.response?.data);
   }
 };

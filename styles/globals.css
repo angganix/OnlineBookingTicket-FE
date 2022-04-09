@@ -44,6 +44,9 @@ ul li {
   @apply  p-3 px-4 rounded-lg border border-blue-500 text-blue-500 hover:text-blue-600;
 }
 
+.button-warning {
+  @apply  p-3 px-4 rounded-lg bg-orange-500 text-white hover:bg-orange-600;
+}
 
 .button-block {
   @apply w-full block;
@@ -85,4 +88,13 @@ ul li {
 
 .select-input {
   @apply rounded bg-white border border-gray-200 p-2 outline-none;
+}
+
+.link-list {
+  @apply p-2 px-3 block hover:bg-gray-100 w-full rounded-lg transition-all duration-200 ease-in-out;
+  @apply flex items-center gap-x-3
+}
+
+.link-list-active {
+  @apply bg-gray-100;
 }

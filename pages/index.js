@@ -4,45 +4,7 @@ import Main from "../components/layouts/Main";
 import homeHero from "../public/lotties/home-hero.json";
 import Lottie from "lottie-react";
 import Link from "next/link";
-
-export const AccountBox = () => {
-  return (
-    <div className="card p-8">
-      <h3 className="font-semibold text-2xl mb-8 block">Login ke Sistem</h3>
-      <form action="" autoComplete="off">
-        <div className="form-group">
-          <label htmlFor="username" className="form-label">
-            Username / Email
-          </label>
-          <input
-            id="username"
-            type="text"
-            className="form-input"
-            placeholder="Username / Email"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            className="form-input"
-            placeholder="Password akun"
-          />
-        </div>
-        <button type="submit" className="button-primary button-block">
-          Login
-        </button>
-        <p className="text-center text-gray-400 my-2">atau</p>
-        <button type="submit" className="button-primary-outline button-block">
-          Daftar
-        </button>
-      </form>
-    </div>
-  );
-};
+import LoginForm from "../components/forms/LoginForm";
 
 export default function Home() {
   return (
@@ -82,7 +44,7 @@ export default function Home() {
             </div>
           </div>
           <aside className="flex-grow-0 w-1/3">
-            <AccountBox />
+            <LoginForm />
           </aside>
         </section>
       </main>

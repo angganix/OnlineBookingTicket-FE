@@ -24,6 +24,31 @@ const SoldBadge = ({ sold }) => {
   );
 };
 
+export const ConcertData = ({ data, noBookingInfo = false }) => {
+  return (
+    <header className="card p-4 px-5">
+      <div className="flex justify-between items-center mb-3">
+        <h1 className="text-2xl font-semibold text-gray-600">{data?.title}</h1>
+        <time className="text-gray-600 flex items-center">
+          <AiOutlineCalendar className="mr-2" size={20} />
+          {moment(data?.time).format("DD/MM/YYYY HH:mm:ss")}
+        </time>
+      </div>
+      <div className="flex justify-between items-center">
+        <p className="text-gray-500">{data?.description}</p>
+        {!noBookingInfo && (
+          <span className="badge-success flex items-center">
+            <span className="text-lg">
+              {countQuota(data?.halls) - countSold(data?.halls)}
+            </span>
+            <span className="ml-1">Available Tickets</span>
+          </span>
+        )}
+      </div>
+    </header>
+  );
+};
+
 export default function DetailConcert({ data, id }) {
   const [currentHall, setCurrentHall] = useState("");
   const [selectedHall, setSelectedHall] = useState([]);
@@ -49,6 +74,7 @@ export default function DetailConcert({ data, id }) {
         dispatch(
           removeBooking({
             ...ticket,
+            hall_name: selectedHall?.name,
             concert_id: id,
           })
         );
@@ -56,6 +82,7 @@ export default function DetailConcert({ data, id }) {
         dispatch(
           addBooking({
             ...ticket,
+            hall_name: selectedHall?.name,
             concert_id: id,
           })
         );
@@ -78,26 +105,7 @@ export default function DetailConcert({ data, id }) {
       <main className="px-16 py-8">
         {data && (
           <>
-            <header className="card p-4 px-5">
-              <div className="flex justify-between items-center mb-3">
-                <h1 className="text-2xl font-semibold text-gray-600">
-                  {data?.title}
-                </h1>
-                <time className="text-gray-600 flex items-center">
-                  <AiOutlineCalendar className="mr-2" size={20} />
-                  {moment(data?.time).format("DD/MM/YYYY HH:mm:ss")}
-                </time>
-              </div>
-              <div className="flex justify-between items-center">
-                <p className="text-gray-500">{data?.description}</p>
-                <span className="badge-success flex items-center">
-                  <span className="text-lg">
-                    {countQuota(data?.halls) - countSold(data?.halls)}
-                  </span>
-                  <span className="ml-1">Available Tickets</span>
-                </span>
-              </div>
-            </header>
+            <ConcertData data={data} />
             <hr className="mt-5 mb-2 border-b border-dashed border-gray-300" />
             <section className="flex justify-between items-center">
               <h4 className="text-lg text-gray-500">Available Seats</h4>
