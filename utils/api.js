@@ -5,7 +5,7 @@ export const api = axios.create({
   baseURL: baseURL,
   timeout: 10000,
   timeoutErrorMessage: "Server not responding",
-  withCredentials: true,
+  withCredentials: process.env.NODE_ENV !== "production" ? true : false,
 });
 
 export const getRequest = async (url) => {
