@@ -53,10 +53,9 @@ export default function Home() {
 }
 
 export async function getStaticProps(context) {
-  const concertData = await getRequest("/concert");
   return {
     props: {
-      data: concertData,
+      data: [],
     }, // will be passed to the page component as props
   };
 }

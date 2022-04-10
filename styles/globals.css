@@ -48,6 +48,14 @@ ul li {
   @apply  p-3 px-4 rounded-lg bg-orange-500 text-white hover:bg-orange-600;
 }
 
+.button-danger {
+  @apply p-3 px-4 rounded-lg bg-red-500 text-white hover:bg-red-600;
+}
+
+.button-small {
+  @apply p-2 px-3 !important;
+}
+
 .button-block {
   @apply w-full block;
 }

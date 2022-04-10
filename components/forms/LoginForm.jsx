@@ -28,7 +28,8 @@ const LoginForm = () => {
         e.preventDefault();
 
         if (form?.username === "" || form?.password === "") {
-            return alert("Username dan password tidak boleh kosong!");
+            alert("Username dan password tidak boleh kosong!");
+            return false;
         }
 
         setLoading(true);

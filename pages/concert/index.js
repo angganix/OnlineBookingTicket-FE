@@ -75,7 +75,16 @@ export default function Concert({ data }) {
 }
 
 export async function getStaticProps(context) {
-  const concertData = await getRequest("/concert");
+  const concertData = await getRequest("/concert")
+    .then((result) => {
+      if (result?.data) {
+        return result;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      return [];
+    });
   return {
     props: {
       data: concertData,

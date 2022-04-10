@@ -9,8 +9,12 @@ import { useState, useEffect } from "react";
 import { ConcertData } from "../concert/[id]";
 import { MdEventSeat, MdOutlineRoomPreferences } from "react-icons/md";
 import { dottedNumber } from "../../utils/functions";
-import { AiOutlineArrowRight } from "react-icons/ai";
-import { cancelBooking, updateOrder } from "../../redux/bookingSlice";
+import { AiOutlineArrowRight, AiOutlineDelete } from "react-icons/ai";
+import {
+  cancelBooking,
+  removeBooking,
+  updateOrder,
+} from "../../redux/bookingSlice";
 
 export default function Checkout() {
   const dispatch = useDispatch();
@@ -27,6 +31,10 @@ export default function Checkout() {
       total += Number(item?.price);
     });
     return dottedNumber(total);
+  };
+
+  const deleteBooking = (item) => {
+    dispatch(removeBooking(item));
   };
 
   const doCheckout = () => {
@@ -133,20 +141,30 @@ export default function Checkout() {
                       </div>
                     </div>
                     <hr className="my-3 border-b border-gray-200 border-dashed" />
-                    <div className="flex items-center gap-x-2">
-                      <label>Person Name</label>
-                      <input
-                        type="text"
-                        className="rounded p-1 px-2 bg-white border border-gray-200 focus:border-blue-500 outline-none w-1/2"
-                        value={
-                          orderList?.detail_orders?.find(
-                            (order) => order?.ticket_id === booking?.id
-                          ).person_name
-                        }
-                        onChange={(e) =>
-                          onPersonNameChange(booking?.id, e.target.value)
-                        }
-                      />
+                    <div className="flex justify-between items-center gap-x-2">
+                      <div className="flex gap-x-2 items-center flex-grow">
+                        <label>Person Name</label>
+                        <input
+                          type="text"
+                          className="rounded p-1 px-2 bg-white border border-gray-200 focus:border-blue-500 outline-none w-1/2"
+                          value={
+                            orderList?.detail_orders?.find(
+                              (order) => order?.ticket_id === booking?.id
+                            ).person_name
+                          }
+                          onChange={(e) =>
+                            onPersonNameChange(booking?.id, e.target.value)
+                          }
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        className="flex items-center gap-x-2 button-danger button-small"
+                        onClick={() => deleteBooking(booking)}
+                      >
+                        <AiOutlineDelete />
+                        <span>Remove</span>
+                      </button>
                     </div>
                   </div>
                 ))
