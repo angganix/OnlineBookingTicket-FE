@@ -40,7 +40,7 @@ export default function Concert({ data }) {
         <h1 className="text-2xl block mb-6 font-semibold text-gray-500">
           Daftar Konser
         </h1>
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-4 gap-x-4">
           {data?.data?.map((item, key) => (
             <Link href={`/concert/${item?.id}`} key={key}>
               <div className="card p-4 cursor-pointer floating-card-animation">
@@ -74,7 +74,7 @@ export default function Concert({ data }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const concertData = await getRequest("/concert")
     .then((result) => {
       if (result?.data) {
