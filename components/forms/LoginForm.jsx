@@ -104,6 +104,7 @@ const LoginForm = () => {
                 <button
                     type="button"
                     className="button-primary-outline button-block"
+                    onClick={() => router.push('/register')}
                 >
                     Daftar
                 </button>

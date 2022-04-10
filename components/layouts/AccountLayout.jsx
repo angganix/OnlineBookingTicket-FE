@@ -3,12 +3,13 @@ import { useSelector } from 'react-redux';
 import Main from './Main'
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { AiOutlineUser, AiOutlineHistory } from 'react-icons/ai';
+import { AiOutlineUser, AiOutlineHistory, AiOutlineLogout } from 'react-icons/ai';
 import Link from 'next/link'
 
 const userMenu = [
     { path: "/account", label: "My Profile", icon: AiOutlineUser },
     { path: "/account/order", label: "Order History", icon: AiOutlineHistory },
+    { path: "/logout", label: "Logout", icon: AiOutlineLogout }
 ];
 
 function AccountLayout({ children }) {

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { getRequest } from "../../utils/api";
+import { getRequest, postRequest } from "../../utils/api";
 import Main from "../../components/layouts/Main";
 import NoData from "../../components/widgets/NoData";
 import Link from "next/link";
@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { ConcertData } from "../concert/[id]";
 import { MdEventSeat, MdOutlineRoomPreferences } from "react-icons/md";
 import { dottedNumber } from "../../utils/functions";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import { cancelBooking, updateOrder } from "../../redux/bookingSlice";
 
 export default function Checkout() {
@@ -26,6 +27,21 @@ export default function Checkout() {
       total += Number(item?.price);
     });
     return dottedNumber(total);
+  };
+
+  const doCheckout = () => {
+    postRequest(`/checkout`, orderList)
+      .then((result) => {
+        if (result?.status) {
+          dispatch(cancelBooking());
+          if (result?.payment?.paymentUrl) {
+            window.location.href = result?.payment?.paymentUrl;
+          }
+        }
+      })
+      .catch((error) => {
+        alert(error?.message);
+      });
   };
 
   const onPersonNameChange = (ticket_id, value) => {
@@ -136,13 +152,23 @@ export default function Checkout() {
                 ))
               : null}
 
-            <div className="card mt-5 p-4">
+            <div className="card mt-5 p-4 mb-4">
               <div className="flex justify-end items-center gap-x-12">
                 <h1 className="text-lg text-gray-600">Total</h1>
                 <h1 className="text-lg">
                   IDR <strong>{getTotalAmount()}</strong>
                 </h1>
               </div>
+            </div>
+            <div className="flex justify-end items-center">
+              <button
+                type="button"
+                className="button-primary flex items-center gap-x-2"
+                onClick={doCheckout}
+              >
+                <span>Checkout</span>
+                <AiOutlineArrowRight />
+              </button>
             </div>
           </>
         ) : (

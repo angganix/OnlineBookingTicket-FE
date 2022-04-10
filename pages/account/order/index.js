@@ -1,7 +1,6 @@
-import { getRequest } from "../../../utils/api";
+import { getRequest, postRequest, putRequest } from "../../../utils/api";
 import NoData from "../../../components/widgets/NoData";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -21,9 +20,29 @@ export default function Order() {
     });
   };
 
-  const countTotal = () => {};
+  const doPayment = () => {
+    const paymentData = new URLSearchParams(window.location.search);
+    const merchantOrderId = paymentData.get("merchantOrderId");
+    const resultCode = paymentData.get("resultCode");
+
+    if (merchantOrderId && resultCode === "00") {
+      putRequest(`/checkout/payment/${merchantOrderId}`)
+        .then((result) => {
+          if (result?.status) {
+            window.history.pushState(null, null, window.location.pathname);
+          }
+        })
+        .catch((error) => {
+          alert("failed payment process!");
+        })
+        .finally(() => {
+          getOrderList();
+        });
+    }
+  };
 
   useEffect(() => {
+    doPayment();
     getOrderList();
   }, []);
 
