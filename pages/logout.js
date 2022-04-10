@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { getRequest, postRequest } from "../utils/api";
+import { postRequest } from "../utils/api";
 import Main from "../components/layouts/Main";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";

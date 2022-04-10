@@ -1,9 +1,5 @@
 import Head from "next/head";
-import { getRequest } from "../utils/api";
 import Main from "../components/layouts/Main";
-import homeHero from "../public/lotties/home-hero.json";
-import Lottie from "lottie-react";
-import Link from "next/link";
 import LoginForm from "../components/forms/LoginForm";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";

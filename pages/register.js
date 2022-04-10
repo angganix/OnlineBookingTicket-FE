@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { getRequest, postRequest } from "../utils/api";
+import { postRequest } from "../utils/api";
 import Main from "../components/layouts/Main";
 import { useRouter } from "next/router";
 import { useState, useRef, useEffect } from "react";

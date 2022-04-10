@@ -1,11 +1,4 @@
-import { getRequest } from "../../utils/api";
-import NoData from "../../components/widgets/NoData";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { AiOutlineUser, AiOutlineHistory } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { dottedNumber } from "../../utils/functions";
+import { useSelector } from "react-redux";
 import AccountLayout from "../../components/layouts/AccountLayout";
 import Image from "next/image";
 import avatarImage from "../../public/images/avatar.png";
